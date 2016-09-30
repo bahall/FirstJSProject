@@ -1,0 +1,19 @@
+{
+  "name": "first-project",
+  "version": "0.0.0",
+  "description": "First Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahall/FirstJSProject.git"
+  },
+  "author": "Brent Hall <hallba@umail.iu.edu>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahall/FirstJSProject/issues"
+  },
+  "homepage": "https://github.com/bahall/FirstJSProject#readme"
+}
