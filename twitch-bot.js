@@ -13,35 +13,54 @@ app.use(bodyParser.json());
 /*******
 set all of the paths for the different files
 *******/
+var chatCommands = require('./Data/chatCommands.js');
 var authStr = fs.readFileSync('./authentication.json');
 var auth = JSON.parse(authStr);
+
+var irc = require("irc"),
+      fs = require("fs"),
+      jf = require("jsonfile"),
+      util = require('util');;
+
 var botStatus = {
     gameState: 0,
     running: false,
     game: null,
 }
 
-var bot = new irc.Client("irc.chat.twitch.tv", "VoiceInMyHead", {
-    "channel": [["tharedmerc"]+" "+auth.oauth],
+var bot = new irc.Client("irc.chat.twitch.tv", auth.name, {
+    "channel": [["#tharedmerc"]+" "+auth.password],
     "debug": DEBUG,
-    "password": auth.oauth,
-    "username": "VoiceInMyHead"
+    "password": auth.password,
+    "username": auth.name
 });
 
-function isValidCommand(command) {
-    return /*create .js file to hold an isIn command*/
-}
+bot.addListener("connect", function() {
+    console.log("**Connected**");
+    bot.say("#tharedmerc", "hello");
+});
 
 function parseCommand(text, user){
-    //if(text)
-    if(text == "!twitter") {
-        var dataStr = fs.readFileSync('./PostCommands/twitter.json');
+    var output;
+    if(chatCommands.isValidCommand(text)) {
+    //if(text == "!twitter") {
+        var dataStr = fs.readFileSync('./Data/commands.json');
         var data = JSON.parse(dataStr);
-        console.log(data.post);
+        switch(text) {
+            case("!twitter"):
+                output = data.twitter;
+                break;
+            case("!steam"):
+                output = data.steam;
+                break;
+            default: break;
+        }
+        console.log(output);
     }
 }
 
 if(!global.DEBUG){
+    bot.say("tharedmerc", "HELLO");
     //run the bot in twitch chat
 }
 else {
