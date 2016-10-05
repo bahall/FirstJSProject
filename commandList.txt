@@ -1,0 +1,8 @@
+!social - gives links to all social media accounts
+!twitter - gives link to twitter account
+!steam - gives link to steam account/group
+!discord - gives link to join discord ***Maybe when i get more popular***
+!commands - gives a list of all commmands in the channel
+!game - gives the name of the current game
+!uptime - gives how long I've been streaming for the day
+!
