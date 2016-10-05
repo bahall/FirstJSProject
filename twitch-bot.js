@@ -13,11 +13,20 @@ app.use(bodyParser.json());
 /*******
 set all of the paths for the different files
 *******/
+var authStr = fs.readFileSync('./authentication.json');
+var auth = JSON.parse(authStr);
 var botStatus = {
     gameState: 0,
     running: false,
     game: null,
 }
+
+var bot = new irc.Client("irc.chat.twitch.tv", "VoiceInMyHead", {
+    "channel": [["tharedmerc"]+" "+auth.oauth],
+    "debug": DEBUG,
+    "password": auth.oauth,
+    "username": "VoiceInMyHead"
+});
 
 function isValidCommand(command) {
     return /*create .js file to hold an isIn command*/
