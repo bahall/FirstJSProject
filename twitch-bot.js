@@ -32,12 +32,22 @@ var bot = new irc.Client("irc.chat.twitch.tv", auth.name, {
     "channel": [["#tharedmerc"]+" "+auth.password],
     "debug": DEBUG,
     "password": auth.password,
-    "username": auth.name
+    "username": "VoiceInMyHead"
 });
 
 bot.addListener("connect", function() {
     console.log("**Connected**");
-    bot.say("#tharedmerc", "hello");
+    //bot.say("#tharedmerc", "Come on ThaRedMerc you can't get rid of me, I'm the voice in your head.");
+});
+
+bot.join("#tharedmerc", function(nick, message) {
+    bot.say("#tharedmerc", "I joined the channel");
+});
+
+bot.addListener("message", function(from, to, text, message) {
+    if(message === "!twitter") {
+        bot.say(to, "got the message");
+    }
 });
 
 function parseCommand(text, user){
@@ -55,12 +65,12 @@ function parseCommand(text, user){
                 break;
             default: break;
         }
-        console.log(output);
+        if(!global.DEBUG) bot.say("#tharedmerc", output);
+        else console.log(output);
     }
 }
 
 if(!global.DEBUG){
-    bot.say("tharedmerc", "HELLO");
     //run the bot in twitch chat
 }
 else {

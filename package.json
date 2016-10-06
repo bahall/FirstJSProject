@@ -1,6 +1,6 @@
 {
   "name": "first-project",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "First Project",
   "main": "twitch-bot.js",
   "scripts": {
