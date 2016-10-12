@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahall/FirstJSProject.git"
+    "url": "git+https://github.com/bahall/TwitchBot.git"
   },
   "author": "Brent Hall <hallba@umail.iu.edu>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bahall/FirstJSProject/issues"
+    "url": "https://github.com/bahall/TwitchBot/issues"
   },
-  "homepage": "https://github.com/bahall/FirstJSProject#readme"
+  "homepage": "https://github.com/bahall/TwitchBot#readme"
 }

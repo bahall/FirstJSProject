@@ -4,23 +4,34 @@ var fs = require('fs');
 var app = express();
 app.use(bodyParser.json());
 
-var validCommands = ["!twitter", "!steam"];
+var data = require('./dataFunctions.js');
+var comStr = require('./commands.json');
+
+var validCommands = ["!twitter", "!steam", "!social", "!commands"];
 
 function isValidCommand(command) {
-    if(isIn(command, validCommands)) return true;
+    if(data.isIn(command, validCommands)) return true;
     else return false;
 }
 
-function isIn(text, array) {
-    var check = false;
-    for(var i = 0; i < array.length; i++) {
-        if(text == array[i]) check = true;
+function listCommands() {
+    var output = "";
+    for(var i = 0; i < validCommands.length; i++) {
+        if(i === validCommands.length-1) output += validCommands[i];
+        else output += validCommands[i] + ", ";
     }
-    if(check == true) return true;
-    else return false;
+    return output;
 }
+
+/*function addCommand(command, description) {
+    comStr.command = description;
+    fs.writeFile('./commands.json', JSON.stringify(comStr), function(err) {
+        console.log(err);
+    });
+}*/
 
 module.exports = {
     isValidCommand: isValidCommand,
-    isIn: isIn
+    //addCommand: addCommand,
+    listCommands: listCommands
 }
