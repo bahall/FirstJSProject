@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/bahall/TwitchBot/issues"
   },
-  "homepage": "https://github.com/bahall/TwitchBot#readme"
+  "homepage": "https://github.com/bahall/TwitchBot#readme",
+  "dependencies": {
+    "tmi.js": "^1.1.1"
+  }
 }

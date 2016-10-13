@@ -4,55 +4,34 @@ if(process.argv[2] == "--debug") {
     global.DEBUG = true;
 }
 
+var tmi = require("tmi.js");
 var irc = require("irc");
-var express = require('express');
-var bodyParser = require('body-parser');
 var fs = require('fs');
 var util = require('util');
-var app = express();
-app.use(bodyParser.json());
-
-/*******
-set all of the paths for the different files
-*******/
+var events = require('events');
 var chatCommands = require('./Data/chatCommands.js');
 var dataFunctions = require('./Data/dataFunctions.js');
 var authStr = fs.readFileSync('./authentication.json');
 var auth = JSON.parse(authStr);
 
-var botStatus = {
-    gameState: 0,
-    running: false,
-    game: null,
-}
-
-var bot = new irc.Client("irc.chat.twitch.tv", auth.name, {
-    "channel": [["#tharedmerc"]+" "+auth.password],
-    "debug": true,
-    "password": auth.password,
-    "username": "VoiceInMyHead"
-});
-
-bot.addListener("connect", function() {
-    console.log("**Connected**");
-    //bot.say("#tharedmerc", "Come on ThaRedMerc you can't get rid of me, I'm the voice in your head.");
-});
-
-bot.join("#tharedmerc", function(nick, message) {
-    console.log("joined channel");
-    bot.say("#tharedmerc", "I joined the channel");
-});
-
-bot.addListener("message", function(from, to, text, message) {
-    console.log("message received",message);
-    if(message === "!twitter") {
-        bot.say(to, "got the message");
-    }
-});
+var options = {
+    options: {
+        debug: true,
+        clientId: "3roghTRag74jkAm"
+    },
+    connection: {
+        reconnect: true
+    },
+    identity: {
+        username: auth.name,
+        password: auth.password
+    },
+    channels: ["#tharedmerc"]
+};
 
 function parseCommand(text, user){
     var output = "Couldn't find command";
-    bot.say("#tharedmerc", output);
+    //bot.say("#tharedmerc", output);
     if(chatCommands.isValidCommand(text)) {
         var dataStr = fs.readFileSync('./Data/commands.json');
         var data = JSON.parse(dataStr);
@@ -79,7 +58,26 @@ function parseCommand(text, user){
 }
 
 if(!global.DEBUG){
-    //run the bot in twitch chat
+    var bot = new tmi.client(options);
+    bot.connect();
+
+    bot.addListener("connect", function() {
+        console.log("**Connected**");
+        //bot.say("#tharedmerc", "Come on ThaRedMerc you can't get rid of me, I'm the voice in your head.");
+        bot.say("#tharedmerc","/mods");
+    });
+    bot.addListener('raw', function(message) { console.log('raw: ', message) });
+    bot.addListener('error', function(message) { console.log(color('error: ', 'red'), message) });
+    bot.addListener("message", function(from, to, text, message) {
+        console.log("message received",text);
+        if(
+        }
+    });
+    bot.join("#tharedmerc", function(nick, message) {
+        console.log("joined channel");
+        bot.say("#tharedmerc", "I joined the channel");
+    });
+
 }
 else {
     process.stdin.setEncoding('utf8');
