@@ -1,7 +1,4 @@
 var fs = require('fs');
-var app = express();
-app.use(bodyParser.json());
-
 var data = require('./dataFunctions.js');
 var comStr = require('./commands.json');
 

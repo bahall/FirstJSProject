@@ -1,8 +1,4 @@
-var express = require('express');
-var bodyParser = require('body-parser');
 var fs = require('fs');
-var app = express();
-app.use(bodyParser.json());
 var chatCommands = require('./chatCommands.js');
 
 function isIn(text, array) {
