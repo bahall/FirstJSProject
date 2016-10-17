@@ -1,3 +1,4 @@
-Username Date Title Votes
-ThaRedMerc 10/17/16 Owner 1
-iD3ADP00L 10/17/16 Viewer 1
+{"Names": "ThaRedMerc iD3ADP00L",
+"FollowDate": "someDate someDate",
+"Title": "Owner Viewer",
+"Vote": "0 1"}
